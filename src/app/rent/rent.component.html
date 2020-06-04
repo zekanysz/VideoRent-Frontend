@@ -1,0 +1,101 @@
+<div class="margin-top margin-bottom container">
+  <h2 class="align-center">Rent</h2>
+
+  <form [formGroup]="rentForm" (ngSubmit)="OnSubmit()">
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-6">
+          <label for="customerId">Customer</label>
+          <select class="form-control" formControlName="customerId" id="customerId">
+            <option value="" selected disabled hidden>Select Customer</option>
+            <option *ngFor="let cust of customerList; let i = index" [value]="customerList[i].customerId">
+              {{ customerList[i].firstName + " " + customerList[i].lastName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label for="movieId">Movie</label>
+          <select class="form-control" formControlName="movieId" id="movieId">
+            <option value="" selected disabled hidden>Select Movie</option>
+            <option *ngFor="let rent of movieList; let i = index" [value]="movieList[i].movieId">
+              {{ movieList[i].title + " (" + movieList[i].year  +  ")" }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-6">
+          <label for="startDate">StartDate</label>
+          <input type="date" class="form-control" formControlName="startDate" id="startDate" placeholder="startDate">
+        </div>
+
+        <div class="col-6">
+          <label for="returnDate">ReturnDate</label>
+          <input type="date" class="form-control" formControlName="returnDate" id="returnDate" placeholder="returnDate">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group align-center">
+      <button type="submit" class="btn allButton btn-width">
+        {{ buttonSave }}
+      </button>
+    </div>
+
+  </form>
+</div>
+
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <th>RentId</th>
+      <th>RentStatus</th>
+      <th>CustomerName</th>
+      <th>MovieTitle</th>
+      <th>StartDate</th>
+      <th>ReturnDate</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr [ngClass]="{
+        'negative' : rnt.rentStatus == 2,
+        'positive' : rnt.rentStatus != 2
+
+     }" *ngFor="let rnt of rentList">
+        <td>{{rnt.rentId}}</td>
+        <td [ngSwitch]="rnt.rentStatus">
+          <p *ngSwitchCase="0">
+            Rented
+          </p>
+          <p *ngSwitchCase="1">
+            Returned
+          </p>
+          <p *ngSwitchCase="2">
+            Delayed
+          </p>
+        </td>
+        <td>{{rnt.customerName}}</td>
+        <td>{{rnt.movieTitle}}</td>
+        <td>{{rnt.startDate}}</td>
+        <td>{{rnt.returnDate}}</td>
+        <td>
+          <button class="btn allButton" (click)="Returned(rnt.rentId)">
+            Returned
+          </button>
+        </td>
+        <td>
+          <button class="btn allButton" (click)="Delete(rnt.rentId)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

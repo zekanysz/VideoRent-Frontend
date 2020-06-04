@@ -1,0 +1,36 @@
+.margin-top{
+  margin-top: 40px;
+}
+
+.margin-bottom{
+  margin-bottom: 40px;
+}
+
+.align-center{
+  text-align: center;
+}
+
+.btn-width{
+  width: 20%;
+}
+.negative {
+  background-color: red;
+  color: white;
+}
+.negative button{
+  background-color: white;
+  border-color: white;
+  color: red;
+
+}
+
+.positive {
+  background-color: white;
+  color: black;
+}
+.positive button{
+  background-color: #3F51B5;
+  border-color: #3F51B5;
+  color: white;
+
+}

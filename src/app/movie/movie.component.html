@@ -1,0 +1,130 @@
+<div class="margin-top margin-bottom container">
+  <h2 class="align-center">Movie</h2>
+
+  <form [formGroup]="movieForm" (ngSubmit)="OnSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" formControlName="title" id="title" placeholder="MovieTitle" />
+    </div>
+
+    <div class="form-group">
+      <label for="year">Year</label>
+      <input type="number" class="form-control" formControlName="year" id="year" placeholder="2020 Corona time" />
+    </div>
+
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <select class="form-control" formControlName="genre" id="genre" name="genre">
+        <option value="" selected disabled hidden>What's the genre of this awesome film?</option>
+        <option value="0">Action</option>
+        <option value="1">Adventure</option>
+        <option value="2">Comedy</option>
+        <option value="3">Crime</option>
+        <option value="4">Drama</option>
+        <option value="5">Fantasy</option>
+        <option value="6">Historical</option>
+        <option value="7">Horror</option>
+        <option value="8">Mistery</option>
+        <option value="9">Political</option>
+        <option value="10">Romantic</option>
+        <option value="11">Sciencefiction</option>
+        <option value="12">Thriller</option>
+      </select>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="status">Status</label>
+      <select class="form-control" formControlName="status" id="status" name="status">
+        <option value="" selected disabled hidden>Is it available</option>
+        <option value="0">Rented</option>
+        <option value="1">Available</option>
+      </select>
+    </div> -->
+
+    <div class="form-group align-center">
+      <button type="submit" class="btn allButton btn-width">
+        {{ buttonSave }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <th>MovieId</th>
+      <th>Title</th>
+      <th>Year</th>
+      <th>Genre</th>
+      <th>Movie status</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mv of movieList">
+        <td>{{ mv.movieId }}</td>
+        <td>{{ mv.title }}</td>
+        <td>{{ mv.year }}</td>
+        <td [ngSwitch]="mv.genre">
+          <p *ngSwitchCase="0">
+            Action
+          </p>
+          <p *ngSwitchCase="1">
+            Adventure
+          </p>
+          <p *ngSwitchCase="2">
+            Comedy
+          </p>
+          <p *ngSwitchCase="3">
+            Crime
+          </p>
+          <p *ngSwitchCase="4">
+            Drama
+          </p>
+          <p *ngSwitchCase="5">
+            Fantasy
+          </p>
+          <p *ngSwitchCase="6">
+            Historical
+          </p>
+          <p *ngSwitchCase="7">
+            Horror
+          </p>
+          <p *ngSwitchCase="8">
+            Mistery
+          </p>
+          <p *ngSwitchCase="9">
+            Political
+          </p>
+          <p *ngSwitchCase="10">
+            Romantic
+          </p>
+          <p *ngSwitchCase="11">
+            Sciencefiction
+          </p>
+          <p *ngSwitchCase="12">
+            Thriller
+          </p>
+        </td>
+        <td [ngSwitch]="mv.movieStatus">
+          <p *ngSwitchCase="0">
+            Available
+          </p>
+          <p *ngSwitchCase="1">
+            Rented
+          </p>
+        </td>
+        <td>
+          <button class="btn allButton" (click)="Edit(mv.movieId)">
+            Edit
+          </button>
+        </td>
+        <td>
+          <button class="btn allButton" (click)="Delete(mv.movieId)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
